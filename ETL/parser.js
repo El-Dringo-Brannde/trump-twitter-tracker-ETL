@@ -12,16 +12,67 @@ const gramOptions = {
 }
 class parser {
    contructor() {
-
       this.todaysWords = ''
       this.parsedWords = {}
+      this.hashTags = []
+      this.mentions = []
+      this.retweetTotal = 0
+      this.favoriteTotal = 0
+   }
+
+   reset() {
+      this.todaysWords = ''
+      this.favoriteTotal = 0
+      this.retweetTotal = 0
    }
 
    async parseTweets(tweets) {
-      this.todaysWords = ''
+      this.reset()
       this.buildTodaysWords(tweets)
       await this.pullWordTypes()
       this.pullPopularWords()
+      this.countHashtags(tweets)
+      this.countMentions(tweets)
+      this.countRetweets(tweets)
+      this.countFavorites(tweets)
+
+      return {
+         nouns: this.parsedWords.nouns,
+         verbs: this.parsedWords.verbs,
+         adjectives: this.parsedWords.adjectives,
+         adverbs: this.parsedWords.adverbs,
+         allWords: this.parsedWords.allWords,
+         hashTags: this.hashTags,
+         mentions: this.mentions,
+         retweets: this.retweetTotal,
+         favorites: this.favoriteTotal
+      }
+   }
+
+   countRetweets(tweets) {
+      for (var i of tweets)
+         this.retweetTotal += i.retweet_count
+   }
+
+   countFavorites(tweets) {
+      for (var i of tweets)
+         this.favoriteTotal += i.favorite_count
+   }
+
+   countMentions(tweets) {
+      let mentions = ''
+      for (var i of tweets)
+         for (var j of i.entities.user_mentions)
+            mentions += ` ${j.screen_name} `
+      this.mentions = gram.extract(mentions, gramOptions)
+   }
+
+   countHashtags(tweets) {
+      let hashTags = ''
+      for (var i of tweets)
+         for (var j of i.entities.hashtags)
+            hashTags += ` ${j.text} `
+      this.hashTags = gram.extract(hashTags, gramOptions)
    }
 
    async pullWordTypes() {
