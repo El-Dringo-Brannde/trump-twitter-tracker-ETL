@@ -1,7 +1,6 @@
 let twit = require('twitter')
 let keys = require('./../config/keys')
 let parser = require('./parser')
-let gram = require('gramophone')
 
 class twitterEngine {
    constructor() {
@@ -12,33 +11,33 @@ class twitterEngine {
          access_token_secret: keys.tokenSecret
       });
       this.parser = parser
-      this.tweets = null;
+      this.lateID = null;
       this.startEngine();
    }
 
    async startEngine() {
-      let tweets = await this.pullTweets();
+      var i = 0;
+      // while (i < 30) {
+      let tweets = await this.pullTweets(this.lateID);
       this.parser.parseTweets(tweets);
       this.saveTweets();
+      // } // pull theoretically a month of tweets
    }
 
    async pullTweets() {
-      let tweets = null;
-      for (var i in [1]) {
-         var params = {
-            screen_name: 'realDonaldTrump',
-            tweet_mode: 'extended',
-            count: 2,
-            trim_user: true
-         };
+      var params = {
+         screen_name: 'realDonaldTrump',
+         tweet_mode: 'extended',
+         count: 200, // Trump tweets an avg. of 7 times a day
+         trim_user: true,
+      }; // pull a days worth of tweets
+      if (this.lateID)
+         params.max_id = this.lateID
 
-         tweets = await this.client.get('statuses/user_timeline', params);
-         let f = gram.extract((tweets[0].full_text).toString(), { ngrams: 1, score: true, min: 2 })
-         console.log(f)
-         return tweets
-      }
+      let tweets = await this.client.get('statuses/user_timeline', params);
+      // console.log(tweets)
+      return tweets
    }
-
 
    saveTweets() { }
 

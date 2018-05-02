@@ -23,7 +23,7 @@
    "homepage": "https://github.com/El-Dringo-Brannde/CS-458-Data-Viz#readme",
    "dependencies": {
       "gramophone": "^0.0.3",
-      "mysql2": "^1.5.3",
+      "mongodb": "^3.0.7",
       "twitter": "^1.7.1",
       "wordpos": "^1.1.6"
    }
