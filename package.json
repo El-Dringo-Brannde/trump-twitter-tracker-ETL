@@ -1,0 +1,30 @@
+{
+   "name": "cs_458",
+   "version": "1.0.0",
+   "description": "Trump Tweet analysis",
+   "main": "index.js",
+   "scripts": {
+      "start": "node ETL/engine.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/El-Dringo-Brannde/CS-458-Data-Viz.git"
+   },
+   "keywords": [
+      "Trump",
+      "Twitter"
+   ],
+   "author": "Brandon Dring Katherine Jeffrey",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/El-Dringo-Brannde/CS-458-Data-Viz/issues"
+   },
+   "homepage": "https://github.com/El-Dringo-Brannde/CS-458-Data-Viz#readme",
+   "dependencies": {
+      "gramophone": "^0.0.3",
+      "mysql2": "^1.5.3",
+      "twitter": "^1.7.1",
+      "wordpos": "^1.1.6"
+   }
+}
