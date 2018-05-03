@@ -7,7 +7,8 @@ word = new word();
 const gramOptions = {
    ngrams: [1],
    score: true,
-   limit: 15,
+   // stem: true,
+   limit: 30,
    stopWords: blackList
 }
 class parser {
@@ -80,17 +81,19 @@ class parser {
 
    async pullWordTypes() {
       let { nouns, verbs, adjectives, adverbs } = await word.getPOS(this.todaysWords)
+
       this.parsedWords = {
-         nouns: gram.extract(nouns.join(' '), gramOptions),
-         verbs: gram.extract(verbs.join(' '), gramOptions),
-         adjectives: gram.extract(adjectives.join(' '), gramOptions),
-         adverbs: gram.extract(adverbs.join(' '), gramOptions)
+         nouns: gram.extract(nouns, gramOptions),
+         verbs: gram.extract(verbs, gramOptions),
+         adjectives: gram.extract(adjectives, gramOptions),
+         adverbs: gram.extract(adverbs, gramOptions)
       }
    }
 
    buildTodaysWords(tweets) {
       for (var i of tweets)
          this.todaysWords += i.full_text
+      this.todaysWords = this.todaysWords.split(' ')
    }
 
    pullPopularWords() {

@@ -19,9 +19,10 @@ class twitterEngine {
    async startEngine() {
       var i = 0;
       this.db = new db()
-      this.db = await this.db.connectToMongo('CS458', 'trump-tweets')
+      this.db = await this.db.connectToMongo('CS458', 'trump-tweets-week')
+      let tweets = []
       while (i < 65) { // twitter only keeps 3,200 of the latest tweets 65 * 49 = ~3200 
-         let tweets = await this.pullTweets(this.endID);
+         tweets = await this.pullTweets(this.endID);
          let parsedTweets = await this.parser.parseTweets(tweets);
          this.addMetadata(parsedTweets)
          let result = await this.db.saveTweets(parsedTweets)
