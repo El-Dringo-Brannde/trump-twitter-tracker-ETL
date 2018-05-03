@@ -22,8 +22,11 @@ class parser {
 
    reset() {
       this.todaysWords = ''
-      this.favoriteTotal = 0
+      this.parsedWords = {}
+      this.hashTags = []
+      this.mentions = []
       this.retweetTotal = 0
+      this.favoriteTotal = 0
    }
 
    async parseTweets(tweets) {

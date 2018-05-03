@@ -3,5 +3,10 @@ module.exports = [
    't',
    's',
    'rt',
-   'u'
+   'u',
+   'amp',
+   'e',
+   'm',
+   'w',
+   'c'
 ]

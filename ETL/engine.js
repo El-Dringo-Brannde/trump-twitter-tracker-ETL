@@ -1,6 +1,7 @@
 let twit = require('twitter')
 let keys = require('./../config/keys')
 let parser = require('./parser')
+let db = require('./db')
 
 class twitterEngine {
    constructor() {
@@ -17,13 +18,17 @@ class twitterEngine {
 
    async startEngine() {
       var i = 0;
-      while (i < 2) {
+      this.db = new db()
+      this.db = await this.db.connectToMongo('CS458', 'trump-tweets')
+      while (i < 65) { // twitter only keeps 3,200 of the latest tweets 65 * 49 = ~3200 
          let tweets = await this.pullTweets(this.endID);
          let parsedTweets = await this.parser.parseTweets(tweets);
          this.addMetadata(parsedTweets)
-         this.saveTweets()
+         let result = await this.db.saveTweets(parsedTweets)
          i++
       } // pull theoretically a month of tweets
+      console.log('Done!')
+      process.exit(0)
    }
 
    addMetadata(parsedTweets) {
@@ -39,7 +44,7 @@ class twitterEngine {
          tweet_mode: 'extended',
          count: 49, // Trump tweets an avg. of 7 times a day
          trim_user: true,
-      }; // pull a days worth of tweets
+      }; // pull a weeks worth of tweets
       if (this.endID)
          params.max_id = this.endID
 
@@ -50,10 +55,5 @@ class twitterEngine {
       this.endID = tweets[tweets.length - 1].id
       return tweets
    }
-
-   saveTweets() {
-
-   }
-
 }
 new twitterEngine();
