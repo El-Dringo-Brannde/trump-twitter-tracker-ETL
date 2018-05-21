@@ -1,4 +1,4 @@
-## CS 458 Data Viz ETL engine
+## Trump Twitter Tracker ETL engine
 
 ### Summary 
 The ETL tool used to pull trump tweets from twitter. Goes through all of Trumps tweets and aggregates them by a composition of all the words in his tweets, nouns, adjectives, adverbs, verbs, then ranks them on which words are used most frequently. 
