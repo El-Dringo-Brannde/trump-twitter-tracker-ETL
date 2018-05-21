@@ -8,6 +8,6 @@ module.exports = class database extends mongoDB {
    }
 
    async saveTweets(tweets) {
-      return await self.updateOne({ startID: tweets.startID }, tweets)
+      return await self.create(tweets)
    }
 } 

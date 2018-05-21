@@ -22,6 +22,7 @@
    },
    "homepage": "https://github.com/El-Dringo-Brannde/CS-458-Data-Viz#readme",
    "dependencies": {
+      "command-line-args": "^5.0.2",
       "gramophone": "^0.0.3",
       "mongodb": "^3.0.7",
       "twitter": "^1.7.1",
