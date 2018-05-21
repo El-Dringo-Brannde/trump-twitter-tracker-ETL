@@ -3,19 +3,16 @@ let blackList = require('./../config/blackList')
 let word = require('wordpos')
 word = new word();
 
-const CLA = require('command-line-args')
-const CLAOptions = require('./../config/CLA')
-const args = CLA(CLAOptions)
+const CLA = require('./../util/CLA')
 
 const gramOptions = {
-      ngrams: [1],
+      ngrams: CLA['phrase-count'],
       score: true,
-      // stem: true,
+      stem: true,
       limit: 30,
       stopWords: blackList
 }
 
-console.log(args)
 class parser {
       contructor() {
             this.todaysWords = ''
