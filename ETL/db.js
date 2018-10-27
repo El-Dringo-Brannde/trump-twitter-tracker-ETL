@@ -8,6 +8,14 @@ module.exports = class database extends mongoDB {
    }
 
    async saveTweets(tweets) {
-      return await self.create(tweets)
+       console.log(`Collected dates from ${tweets['endDate']} to ${tweets['startDate']}`)
+      return await self.update({
+          endID: {
+              $gte: tweets['endID'], 
+          }, 
+          startID:{
+              $lte: tweets['startID']
+            }}, 
+        tweets)
    }
 } 
