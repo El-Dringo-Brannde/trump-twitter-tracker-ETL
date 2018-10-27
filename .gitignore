@@ -29,3 +29,7 @@ node_modules
 
 # configuration
 config/*
+
+.vscode/
+
+src/config/constants.js
