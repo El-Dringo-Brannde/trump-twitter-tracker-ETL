@@ -9,7 +9,7 @@ Also allows the grouping of both single word.. words, along with 2 - 3 long phra
 
 1. Install all the dependencies, `yarn`
 2. Create a file called `mongo.js` under config folder, export your mongoDB connection string
-3. Run with the required CLA, `node ETL/engine.js --duration <month | week | year> --phrase-count <1 | 2 | 3>`
+3. Run with `bash`, such as `bash dataCollection.sh`
 4. Wait to see the database populated
 5. `$$Profit$$`
 
